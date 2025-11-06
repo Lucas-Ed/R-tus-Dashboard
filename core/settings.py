@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+# Para fins de test
+TEST_MONGO_DB = "rotus_test_db"
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -74,7 +77,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # Configurações Mongo - não é DATABASES padrão do Django (usamos MongoEngine)
-MONGO_HOST = os.getenv('MONGO_HOST', 'mongodb://localhost:27017/rotus_db')
+#MONGO_HOST = os.getenv('MONGO_HOST', 'mongodb://localhost:27017/rotus_db')
+# MongoDB settings
+MONGO_HOST = "mongodb://localhost:27017"
+MONGO_DB = "rotus_db"
+MONGO_USER = None
+MONGO_PASS = None
+
 
 # DATABASES = {
 #     'default': {

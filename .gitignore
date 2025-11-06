@@ -1,3 +1,6 @@
 .venv/
-
 dados.md
+core/__pycache__/
+core/*.py[cod]
+dashboard/__pycache__/
+dashboard/*.py[cod]

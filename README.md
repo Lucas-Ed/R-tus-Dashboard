@@ -26,7 +26,7 @@ A aplicação exibe indicadores nutricionais (energia média, top 10 receitas, e
 
 ```
  
-📂rotus-project/
+📂R-TUS-DASHBOARD/
 ├─ 📂 core/                 # Projeto principal Django
 │  ├─ 📄 settings.py
 │  ├─ 📄 urls.py
@@ -35,6 +35,11 @@ A aplicação exibe indicadores nutricionais (energia média, top 10 receitas, e
 │  ├─ 📄 models.py
 │  ├─ 📄 views.py
 │  ├─ 📄 urls.py
+│  ├─ 📂 tests/
+│  │  ├─ 📄  test_api_integrations.py  # Testa a integração com API 
+│  │  ├─ 📄  test_crud.py               # Testa as operações CRUD
+│  │  ├─ 📄  test_models.py            # Testa os modelos do MongoDB
+│  │  └─ 📄  test_urls.py               # Testa as rotas da API
 │  └─ 📄 templates/dashboard/index.html
 ├─ 📂 static/
 │  ├─ 📄 css/style.css
@@ -134,21 +139,6 @@ Acesse no navegador:
 | `PUT` | `/api/rotulos/<id>/` | Atualiza dados de um rótulo |
 | `DELETE` | `/api/rotulos/<id>/` | Exclui rótulo |
 | `GET` | `/api/indicadores/` | Retorna dados de indicadores e top 10 |
-
----
-
-## 📦 Requisitos (requirements.txt)
-
-```text
-asgiref==3.10.0
-Django==5.2.7
-dnspython==2.8.0
-Faker==37.12.0
-mongoengine==0.29.1
-pymongo==4.15.3
-sqlparse==0.5.3
-tzdata==2025.2
-```
 
 ---
 
