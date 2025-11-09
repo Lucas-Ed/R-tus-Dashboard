@@ -1,12 +1,22 @@
 from django.urls import path
 from . import views
+from . import views as api
 
 app_name = 'dashboard'
 
 urlpatterns = [
-    path('', views.index, name='index'),               
-    # API endpoints (JSON)
-    path('api/rotulos/', views.rotulos_list, name='rotulos_list'),   # GET list, POST create
-    path('api/rotulos/<str:id>/', views.rotulos_detail, name='rotulos_detail'), # GET/PUT/DELETE
-    path('api/indicadores/', views.indicadores, name='indicadores'), # indicadores para gráficos
+    path('', views.index, name='index'),    
+    path('dash/', views.dash, name='dash'),           
+
+    # Ingredientes
+    path('ingredientes/', api.ingredientes_list_create, name='ingredientes-list-create'),
+    path('ingredientes/<str:ingrediente_id>/', api.ingrediente_detail, name='ingrediente-detail'),
+    path('receitas/<str:receita_id>/ingredientes/', api.ingredientes_create_for_receita, name='ingredientes-create'),
+
+    # Receitas
+    path('receitas/', api.receitas_list_create, name='receitas-list-create'), # Listar Receitas
+    path('receitas/<str:receita_id>/', api.receita_detail, name='receita-detail'), #  Detalhes, Atualizar, Deletar Receita
+
+
+
 ]

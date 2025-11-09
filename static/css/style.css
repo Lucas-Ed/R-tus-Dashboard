@@ -1,1 +1,72 @@
-body { padding-bottom: 60px; }
+/* Background gradiente solicitado */
+body {
+    background: RGB(19, 19, 31);
+    background: linear-gradient(90deg, rgba(19, 19, 31, 1) 0%, rgba(90, 173, 45, 1) 50%, rgba(74, 173, 157, 1) 100%);
+    min-height: 100vh;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+
+/* Cartões */
+.card {
+    border: none;
+}
+
+.btn-open-dashboard {
+  border: 2px solid white; /* 2px de espessura, cor preta */
+}
+/* Botões padrão (não deletar) */
+.btn-primary, .btn-primary:focus, .btn-primary:hover, .btn-primary:active {
+    background-color: rgb(74, 173, 157) !important;
+    border-color: rgb(74, 173, 157) !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+/* Botões secundários (limpar etc) também com cor pedida */
+.btn-secondary, .btn-secondary:focus, .btn-secondary:hover {
+    background-color: rgb(74, 173, 157) !important;
+    border-color: rgb(74, 173, 157) !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+/* Botões de deletar (vermelho) */
+.btn-danger, .btn-danger:focus, .btn-danger:hover {
+    background-color: #d9534f !important;
+    border-color: #d9534f !important;
+    color: white !important;
+}
+
+/* Ícones (garantir contraste) */
+.bi {
+    vertical-align: -.125em;
+}
+
+/* Lista de ingredientes: cada item em card menor */
+.ingrediente-item {
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: .6rem;
+    margin-bottom: .5rem;
+    border-radius: .35rem;
+    background: rgba(255,255,255,0.6);
+}
+
+/* Botões pequenos dentro da lista */
+.btn-sm {
+    background-color: rgb(74, 173, 157);
+    border-color: rgb(74, 173, 157);
+    color: white;
+}
+
+/* Tabela ações - estreita */
+.table .actions-btn {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 767px) {
+    body { padding-left: 0.5rem; padding-right: 0.5rem; }
+}

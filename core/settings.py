@@ -77,13 +77,27 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # Configurações Mongo - não é DATABASES padrão do Django (usamos MongoEngine)
-#MONGO_HOST = os.getenv('MONGO_HOST', 'mongodb://localhost:27017/rotus_db')
-# MongoDB settings
-MONGO_HOST = "mongodb://localhost:27017"
-MONGO_DB = "rotus_db"
-MONGO_USER = None
-MONGO_PASS = None
+#MONGO_HOST = os.getenv('MONGO_HOST', 'mongodb://localhost:27017/seu-db')
+# MongoDB  atlas settings
+MONGO_HOST = "cluster0.wmistgg.mongodb.net"
+MONGO_DB = "seu-db"
+MONGO_USER = 'seu-user'
+MONGO_PASS = 'sua-senha'
 
+# Ativar apenas quando for rodar os tests
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": ":memory:",
+#     }
+# }
+
+
+# Se for usar MongoDb local descomentar as settings abaixo e comentar as de atlas acima.
+# MONGO_HOST = "mongodb://localhost:27017"
+# MONGO_DB = "rotus_db"
+# MONGO_USER = None
+# MONGO_PASS = None
 
 # DATABASES = {
 #     'default': {

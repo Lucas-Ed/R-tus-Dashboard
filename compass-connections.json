@@ -1,0 +1,26 @@
+{
+  "type": "Compass Connections",
+  "version": {
+    "$numberInt": "1"
+  },
+  "connections": [
+    {
+      "id": "b5094a14-e25f-490f-858e-96c05e9c731a",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1762555313474"
+        }
+      },
+      "favorite": {
+        "name": "rotus_db"
+      },
+      "savedConnectionType": "recent",
+      "connectionOptions": {
+        "connectionString": "mongodb://localhost:27017/",
+        "oidc": {
+          "serializedState": "eyJvaWRjUGx1Z2luU3RhdGVWZXJzaW9uIjoxLCJzdGF0ZSI6W119"
+        }
+      }
+    }
+  ]
+}
