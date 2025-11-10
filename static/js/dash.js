@@ -1,4 +1,4 @@
-   document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const apiUrl = "/dashboard/dashboard-stats/";
 
     try {
@@ -7,28 +7,28 @@
 
         if (data.error) throw new Error(data.error);
 
-        // Atualiza indicadores numéricos
+        // === Indicadores numéricos ===
         document.getElementById("total-receitas").textContent = data.total_receitas || 0;
         document.getElementById("total-ingredientes").textContent = data.total_ingredientes || 0;
         document.getElementById("media-energia").textContent = data.media_energia ? data.media_energia.toFixed(2) : "0";
+        document.getElementById("porcao-media").textContent = data.porcao_media ? data.porcao_media.toFixed(2) : "0";
 
         // === Gráfico: Receitas por Tipo ===
         const tiposLabels = Object.keys(data.receitas_por_tipo || {});
         const tiposData = Object.values(data.receitas_por_tipo || {});
-
         new Chart(document.getElementById("chartTipos"), {
             type: 'pie',
             data: {
                 labels: tiposLabels.length ? tiposLabels : ["Sem dados"],
                 datasets: [{
                     data: tiposData.length ? tiposData : [1],
-                    backgroundColor: ['#4aad9d', '#ff6384', '#36a2eb', '#ffcd56', '#9966ff', '#c9cbcf']
+                    backgroundColor: ['#4aad9d', '#ff6384', '#36a2eb', '#ffcd56', '#9966ff']
                 }]
             },
             options: { plugins: { legend: { position: 'bottom' } } }
         });
 
-        // === Gráfico: Energia Média por Receita (ou indicador alternativo) ===
+        // === Gráfico: Energia Média por Receita ===
         new Chart(document.getElementById("chartEnergia"), {
             type: 'bar',
             data: {
@@ -45,10 +45,28 @@
             }
         });
 
+        // === Novo Gráfico: Porção Média por Tipo de Receita ===
+        const porcaoLabels = Object.keys(data.porcao_media_por_tipo || {});
+        const porcaoData = Object.values(data.porcao_media_por_tipo || {});
+        new Chart(document.getElementById("chartPorcaoTipo"), {
+            type: 'bar',
+            data: {
+                labels: porcaoLabels.length ? porcaoLabels : ["Sem dados"],
+                datasets: [{
+                    label: 'Porção Média (g/ml)',
+                    data: porcaoData.length ? porcaoData : [1],
+                    backgroundColor: '#36a2eb'
+                }]
+            },
+            options: {
+                scales: { y: { beginAtZero: true } },
+                plugins: { legend: { display: false } }
+            }
+        });
+
         // === Gráfico: Top 5 Ingredientes Mais Usados ===
         const ingLabels = Object.keys(data.top_ingredientes || {});
         const ingData = Object.values(data.top_ingredientes || {});
-
         new Chart(document.getElementById("chartIngredientes"), {
             type: 'doughnut',
             data: {
@@ -58,13 +76,17 @@
                     backgroundColor: ['#4aad9d', '#36a2eb', '#ff6384', '#ffcd56', '#9966ff']
                 }]
             },
-            options: { plugins: { legend: { position: 'bottom' } } }
+            options: { 
+                aspectRatio: 1, // <-- reduz tamanho visual
+                plugins: { legend: { position: 'bottom' } } 
+            }
         });
 
     } catch (error) {
         console.error("Erro ao carregar dashboard:", error);
     }
 });
+
    //    // Exemplos de dados estáticos
     //     const ctx1 = document.getElementById('chartTipos');
     //     new Chart(ctx1, {

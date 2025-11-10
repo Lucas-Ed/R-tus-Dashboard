@@ -1,4 +1,10 @@
 
+<!-- <h4 align="center">
+  <img src="static/img/logo.svg" alt="Rótus Logo" width="60" style="vertical-align: middle; margin-right: 10px;"/>
+ <span style="font-size: 20px;">- 2025 | DSM</span>
+</h4>
+
+<p align="center"> -->
 <h1 align="center">🧠 Rótus — Dashboard Nutricional- 2025 | DSM</h1>
 <p align="center">
 
@@ -10,6 +16,7 @@
 Projeto avaliativo da disciplina Banco de dados não relacional, 3° semestre, do curso <a href="https://fatecararas.cps.sp.gov.br/tecnologia-em-desenvolvimento-de-softwares-multiplataforma/">DSM- Desenvolvimento de software multiplataforma.</a>
 
 # 📃 Sumário:
+
 <p align="center">
  <a href="#-status-do-projeto">Status</a> • 
  <a href="#-layout-da-página-inicial">Layout</a> • 
@@ -24,7 +31,6 @@ Projeto avaliativo da disciplina Banco de dados não relacional, 3° semestre, d
  <a href="#-autores">Autores</a> • 
  <a href="#memo-licença">Licença</a>
 </p>
-
  
 
 **Rótus** é um dashboard interativo desenvolvido em **Django 5 + MongoDB (Atlas)** para **análise e gerenciamento de receitas e ingredientes**.  
@@ -78,7 +84,7 @@ A aplicação permite **CRUD completo** de receitas, cálculo de indicadores, e 
 ├─ 📂 dashboard/
 | ├─ 📂 management/
 │  ├─ 📂 commands/
-|  │   └─  📄 popular_receitas.py
+|  │   └─  📄 popular_receitas.py #  Gera 100 receitas para o DB.
 │  ├─ 📂 migrations/
 │  ├─ 📂 models/
 │  │   ├─ 📄 __init__.py
@@ -114,7 +120,6 @@ A aplicação permite **CRUD completo** de receitas, cálculo de indicadores, e 
 ├─ 📄 .coverage
 ├─ 📄 .gitignore
 ├─ 📄 compose-connections.json
-├─ 📄 databases.txt
 ├─ 📄 LICENSE
 ├─ 📄 manage.py
 ├─ 📄 pytest.ini
@@ -230,13 +235,16 @@ Acesse:
 
 O dashboard analítico exibe dados calculados em tempo real via endpoint `/dashboard/dashboard-stats/`:
 
-| Indicador | Descrição |
-|------------|------------|
-| **Total de Receitas** | Contagem total de receitas cadastradas |
-| **Total de Ingredientes** | Quantidade total de ingredientes no sistema |
-| **Receitas por Tipo** | Distribuição por categoria (Doce, Salgada, Fit, etc.) |
-| **Top 5 Ingredientes Mais Usados** | Ingredientes mais frequentes nas receitas |
-| **Energia Média por Receita** | Calculada a partir dos alimentos da TACO (kcal/100g) ou indicador alternativo |
+| Indicador                          | Descrição                                             |
+| ---------------------------------- | ----------------------------------------------------- |
+| **Total de Receitas**              | Quantidade total de receitas cadastradas              |
+| **Total de Ingredientes**          | Quantidade total de ingredientes no sistema           |
+| **Receitas por Tipo**              | Distribuição por categoria (Doce, Salgada, Fit, etc.) |
+| **Top 5 Ingredientes Mais Usados** | Ingredientes mais frequentes nas receitas             |
+| **Energia Média por Receita**      | Média energética das receitas (kcal/100g)             |
+| **Porção Média**                   | Peso médio das porções das receitas                   |
+| **Porção Média por Tipo**          | Peso médio das porções, agrupadas por tipo de receita |
+
 
 Gráficos utilizados:
 - 🥧 **Pie Chart** — Receitas por Tipo  
@@ -278,8 +286,15 @@ Gráficos utilizados:
     "Leite": 6,
     "Manteiga": 5
   },
-  "media_energia": 254.8
+  "media_energia": 254.8,
+  "porcao_media": 120.5,
+  "porcao_media_por_tipo": {
+    "Doce": 115.2,
+    "Salgada": 130.1,
+    "Vegana": 110.8
+  }
 }
+
 ```
 
 ---

@@ -19,13 +19,15 @@
 
 </head>
 <body class="container py-4">
-
+    {% load static %}
     <header class="d-flex align-items-center justify-content-between mb-4">
-        <h1 class="m-0" style="color: white;">Rótus — Dashboard</h1>
-        <div>
+        <div class="text-start">
             <!-- <button id="btn-open-user-modal" class="btn btn-primary me-2">Cadastrar Usuário</button> -->
-            <button  style=" border: 2px solid white;" id="btn-open-dashboard" class="btn btn-primary me-2" data-url="{% url 'dashboard:dash' %}"> Dashboard </button>
-
+            <!-- <button  style=" border: 2px solid white;" id="btn-open-dashboard" class="btn btn-primary me-2" data-url="{% url 'dashboard:dash' %}"> Dashboard </button> -->
+            <button id="btn-open-dashboard" class="btn btn-primary me-2" data-url="{% url 'dashboard:dash' %}" style="border: 2px solid white; margin-right: auto;"> Dashboard</button>
+        </div>
+        <div class="text-end">
+            <img src="{% static 'img/logo.svg' %}" alt="Rótus — Dashboard" style="height: 50px;">
         </div>
     </header>
 

@@ -10,45 +10,73 @@
     <link rel="stylesheet" href="/static/css/dash.css">
 </head>
 <body class="container py-4">
+    {% load static %}
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 style="color: white;">Dashboard — Rótus</h2>
+        <!-- <h2 style="color: white;">Dashboard — Rótus</h2> -->
+            <div class="text-start">
+            <img src="{% static 'img/logo.svg' %}" alt="Rótus — Dashboard" style="height: 50px;">
+        </div>
         <a href="{% url 'dashboard:index' %}" class="btn btn-secondary">Voltar</a>
     </div>
 
-    <div class="row g-3 mb-4">
-        <div class="col-md-3">
-            <div class="card text-center p-3"><h6>Total de Receitas</h6><h4 id="total-receitas">0</h4></div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-center p-3"><h6>Média Energia (kcal/100g)</h6><h4 id="media-energia">0</h4></div>
-        </div>
-        <!-- <div class="col-md-3">
-            <div class="card text-center p-3"><h6>Total de Usuários</h6><h4 id="total-usuarios">0</h4></div>
-        </div> -->
-        <div class="col-md-3">
-            <div class="card text-center p-3"><h6>Total de Ingredientes</h6><h4 id="total-ingredientes">0</h4></div>
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h6>Total de Receitas</h6>
+            <h4 id="total-receitas">0</h4>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h6>Média Energia (kcal/100g)</h6>
+            <h4 id="media-energia">0</h4>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h6>Total de Ingredientes</h6>
+            <h4 id="total-ingredientes">0</h4>
+        </div>
+    </div>
+    <!-- Novo indicador -->
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h6>Porção Média (g/ml)</h6>
+            <h4 id="porcao-media">0</h4>
+        </div>
+    </div>
+</div>
 
-    <div class="row g-4">
-        <div class="col-md-6">
-            <div class="card p-3">
-                <h6>Receitas por Tipo</h6>
-                <canvas id="chartTipos"></canvas>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card p-3">
-                <h6>Energia Média por Receita</h6>
-                <canvas id="chartEnergia"></canvas>
-            </div>
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h6>Receitas por Tipo</h6>
+            <canvas id="chartTipos"></canvas>
         </div>
     </div>
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h6>Energia Média por Receita</h6>
+            <canvas id="chartEnergia"></canvas>
+        </div>
+    </div>
+</div>
 
-    <div class="card mt-4 p-3">
-        <h6>Top 5 Ingredientes Mais Usados</h6>
-        <canvas id="chartIngredientes"></canvas>
+<!-- Novo gráfico abaixo -->
+<div class="row g-4 mt-2">
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h6>Porção Média por Tipo de Receita</h6>
+            <canvas id="chartPorcaoTipo"></canvas>
+        </div>
     </div>
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h6>Top 5 Ingredientes Mais Usados</h6>
+            <canvas id="chartIngredientes"></canvas>
+        </div>
+    </div>
+</div>
 
 <script src="/static/js/dash.js"></script>
 </body>

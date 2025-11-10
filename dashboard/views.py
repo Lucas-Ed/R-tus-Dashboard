@@ -8,7 +8,7 @@ from mongoengine.errors import ValidationError as MEValidationError
 from .api_utils import document_to_dict
 from .models import Receita, Ingrediente
 from django.http import JsonResponse
-from collections import Counter
+from collections import Counter, defaultdict
 
 
 # ---------- Páginas ----------
@@ -280,7 +280,8 @@ def dashboard_stats(request):
     - total de ingredientes
     - receitas por tipo (categoria)
     - top 5 ingredientes mais usados
-    - energia média por receita (se possível)
+    - energia média por receita (kcal/100g)
+    - porção média geral e por tipo de receita
     """
     try:
         # === Totais ===
@@ -295,15 +296,13 @@ def dashboard_stats(request):
         ingredientes_nomes = []
         for ing in Ingrediente.objects.only("alimento"):
             if ing.alimento:
-                try:
-                    ingredientes_nomes.append(ing.alimento.nome)
-                except:
-                    pass
+                # Pode ser um StringField, então usa direto
+                nome_alimento = str(ing.alimento)
+                ingredientes_nomes.append(nome_alimento.strip())
 
         top_ingredientes = dict(Counter(ingredientes_nomes).most_common(5))
 
         # === Energia média por receita (se disponível) ===
-        # Supondo que cada AlimentoTaco tem campo 'energia_kcal'
         energia_media = None
         energia_por_receita = []
 
@@ -328,16 +327,34 @@ def dashboard_stats(request):
         except Exception:
             energia_media = None
 
-        # Se não houver energia disponível, cria outro indicador substituto
         if energia_media is None:
-            energia_media = total_ingredientes / total_receitas if total_receitas else 0
+            energia_media = round(total_ingredientes / total_receitas, 2) if total_receitas else 0
 
+        # === Porção média geral ===
+        porcoes = [float(r.porcao_individual or 0) for r in Receita.objects.only("porcao_individual") if r.porcao_individual]
+        porcao_media = round(sum(porcoes) / len(porcoes), 2) if porcoes else 0
+
+        # === Porção média por tipo de receita ===
+        porcao_por_tipo = defaultdict(list)
+        for r in Receita.objects.only("categoria", "porcao_individual"):
+            if r.porcao_individual:
+                categoria = r.categoria or "Sem categoria"
+                porcao_por_tipo[categoria].append(float(r.porcao_individual))
+
+        porcao_media_por_tipo = {
+            cat: round(sum(vals) / len(vals), 2)
+            for cat, vals in porcao_por_tipo.items()
+        }
+
+        # === Retorno JSON ===
         data = {
             "total_receitas": total_receitas,
             "total_ingredientes": total_ingredientes,
             "receitas_por_tipo": categorias_count,
             "top_ingredientes": top_ingredientes,
             "media_energia": energia_media,
+            "porcao_media": porcao_media,
+            "porcao_media_por_tipo": porcao_media_por_tipo,
         }
 
         return JsonResponse(data, safe=False)
