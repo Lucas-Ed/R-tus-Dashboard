@@ -17,6 +17,10 @@ urlpatterns = [
     path('receitas/', api.receitas_list_create, name='receitas-list-create'), # Listar Receitas
     path('receitas/<str:receita_id>/', api.receita_detail, name='receita-detail'), #  Detalhes, Atualizar, Deletar Receita
 
+    # dashboard
+    path('dashboard-stats/', api.dashboard_stats, name='dashboard-stats'),
+
+
 
 
 ]

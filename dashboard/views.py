@@ -7,6 +7,8 @@ from decimal import Decimal, InvalidOperation
 from mongoengine.errors import ValidationError as MEValidationError
 from .api_utils import document_to_dict
 from .models import Receita, Ingrediente
+from django.http import JsonResponse
+from collections import Counter
 
 
 # ---------- Páginas ----------
@@ -268,3 +270,77 @@ def receita_detail(request, receita_id):
         return HttpResponse(status=204)
 
     return HttpResponseNotAllowed(['GET', 'PUT', 'DELETE'])
+
+# ========== Pagína Dashboard =================================
+@csrf_exempt
+def dashboard_stats(request):
+    """
+    Retorna estatísticas agregadas para o dashboard:
+    - total de receitas
+    - total de ingredientes
+    - receitas por tipo (categoria)
+    - top 5 ingredientes mais usados
+    - energia média por receita (se possível)
+    """
+    try:
+        # === Totais ===
+        total_receitas = Receita.objects.count()
+        total_ingredientes = Ingrediente.objects.count()
+
+        # === Receitas por tipo (categoria) ===
+        categorias = [r.categoria or "Sem categoria" for r in Receita.objects.only("categoria")]
+        categorias_count = dict(Counter(categorias))
+
+        # === Top 5 ingredientes mais usados ===
+        ingredientes_nomes = []
+        for ing in Ingrediente.objects.only("alimento"):
+            if ing.alimento:
+                try:
+                    ingredientes_nomes.append(ing.alimento.nome)
+                except:
+                    pass
+
+        top_ingredientes = dict(Counter(ingredientes_nomes).most_common(5))
+
+        # === Energia média por receita (se disponível) ===
+        # Supondo que cada AlimentoTaco tem campo 'energia_kcal'
+        energia_media = None
+        energia_por_receita = []
+
+        try:
+            for receita in Receita.objects:
+                ingredientes = Ingrediente.objects(receita=receita, alimento__exists=True)
+                if not ingredientes:
+                    continue
+
+                energia_total = 0
+                peso_total = 0
+                for ing in ingredientes:
+                    if ing.alimento and hasattr(ing.alimento, 'energia_kcal'):
+                        energia_total += float(ing.alimento.energia_kcal or 0) * float(ing.peso_liquido or 0) / 100
+                        peso_total += float(ing.peso_liquido or 0)
+
+                if peso_total > 0:
+                    energia_por_receita.append(energia_total / peso_total * 100)  # kcal/100g
+
+            if energia_por_receita:
+                energia_media = round(sum(energia_por_receita) / len(energia_por_receita), 2)
+        except Exception:
+            energia_media = None
+
+        # Se não houver energia disponível, cria outro indicador substituto
+        if energia_media is None:
+            energia_media = total_ingredientes / total_receitas if total_receitas else 0
+
+        data = {
+            "total_receitas": total_receitas,
+            "total_ingredientes": total_ingredientes,
+            "receitas_por_tipo": categorias_count,
+            "top_ingredientes": top_ingredientes,
+            "media_energia": energia_media,
+        }
+
+        return JsonResponse(data, safe=False)
+
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)

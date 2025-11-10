@@ -1,14 +1,53 @@
-# 🧠 Rótus — Dashboard Nutricional  
+
+<h1 align="center">🧠 Rótus — Dashboard Nutricional- 2025 | DSM</h1>
+<p align="center">
+
+  ![]()
+  
+</p>
+
+<p align="center">
+Projeto avaliativo da disciplina Banco de dados não relacional, 3° semestre, do curso <a href="https://fatecararas.cps.sp.gov.br/tecnologia-em-desenvolvimento-de-softwares-multiplataforma/">DSM- Desenvolvimento de software multiplataforma.</a>
+
+# 📃 Sumário:
+<p align="center">
+ <a href="#-status-do-projeto">Status</a> • 
+ <a href="#-layout-da-página-inicial">Layout</a> • 
+ <a href="#-tecnologias-utilizadas">Tecnologias</a> • 
+ <a href="#-estrutura-do-projeto">Estrutura</a> • 
+ <a href="#️-instalação-e-configuração">Instalação</a> • 
+ <a href="#-executar-testes-com-coverage">Testes</a> • 
+ <a href="#️-executar-o-servidor-para-desenvolvimento">Execução</a> • 
+ <a href="#-funcionalidades">Funcionalidades</a> • 
+ <a href="#-indicadores-do-dashboard">Indicadores</a> • 
+ <a href="#-endpoints-da-api">API</a> • 
+ <a href="#-autores">Autores</a> • 
+ <a href="#memo-licença">Licença</a>
+</p>
+
+ 
 
 **Rótus** é um dashboard interativo desenvolvido em **Django 5 + MongoDB (Atlas)** para **análise e gerenciamento de receitas e ingredientes**.  
 A aplicação permite **CRUD completo** de receitas, cálculo de indicadores, e exibe **insights visuais** com gráficos dinâmicos via **Chart.js**.
 
 ---
 
+
 ### 📊 Status do Projeto
 <!-- ![Status](https://img.shields.io/badge/status-em%20andamento-yellow)   -->
 <!-- <h3 align="center">✅ Concluído ✅</h3> -->
 <h3 align="center">🚧🚧 Em construção!  👷 🧱🚧</h3>
+
+---
+## Layout da página inicial
+![Dashboard Screenshot](/img/index.JPG)
+
+<br>
+<br>
+
+## Layout do Dashboard
+
+![Dashboard Screenshot](/img/dash.JPG)
 
 ---
 
@@ -37,6 +76,9 @@ A aplicação permite **CRUD completo** de receitas, cálculo de indicadores, e 
 │  └─ 📄 wsgi.py
 │
 ├─ 📂 dashboard/
+| ├─ 📂 management/
+│  ├─ 📂 commands/
+|  │   └─  📄 popular_receitas.py
 │  ├─ 📂 migrations/
 │  ├─ 📂 models/
 │  │   ├─ 📄 __init__.py
@@ -145,18 +187,17 @@ python -m coverage report
 python -m coverage html
 start htmlcov/index.html
 ```
-<!-- 
+ 
 ## 🧪 Popular Banco com Dados Fictícios
 
 ```bash
-python scripts/populate_mongo.py
+python manage.py popular_receitas
 ```
 
 Saída esperada:
 ```
-Populando receitas e ingredientes...
-Concluído com sucesso.
-``` -->
+  Banco populado com 100 receitas!
+``` 
 
 ---
 
@@ -258,7 +299,7 @@ Gráficos utilizados:
 
 ---
 
-## 🪪 Licença
+## :memo: Licença
 
 Distribuído sob a licença **MIT**.  
 Este projeto é de uso acadêmico e pode ser utilizado livremente para fins educacionais.
