@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rótus — Dashboard de Rótulos Nutricionais</title>
-
+    <title>Dashboard- Inicío</title>
+    <!-- Carrega o Static files -->
+    {% load static %}
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -16,14 +17,12 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}" style="">
 
 </head>
 <body class="container py-4">
-    {% load static %}
     <header class="d-flex align-items-center justify-content-between mb-4">
-        <div class="text-start">
-            <!-- <button id="btn-open-user-modal" class="btn btn-primary me-2">Cadastrar Usuário</button> -->
-            <!-- <button  style=" border: 2px solid white;" id="btn-open-dashboard" class="btn btn-primary me-2" data-url="{% url 'dashboard:dash' %}"> Dashboard </button> -->
             <button id="btn-open-dashboard" class="btn btn-primary me-2" data-url="{% url 'dashboard:dash' %}" style="border: 2px solid white; margin-right: auto;"> Dashboard</button>
         </div>
         <div class="text-end">
@@ -69,11 +68,6 @@
                             <label class="form-label">Modo de Preparo</label>
                             <textarea id="receita-modo" rows="3" class="form-control"></textarea>
                         </div>
-
-                        <!-- <div class="mb-2 form-check">
-                            <input type="checkbox" id="habilitar-precificacao" class="form-check-input">
-                            <label class="form-check-label" for="habilitar-precificacao">Habilitar Precificação</label>
-                        </div> -->
 
                         <hr>
 

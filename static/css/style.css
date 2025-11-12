@@ -58,7 +58,12 @@ body {
     border-color: rgb(74, 173, 157);
     color: white;
 }
-
+.btn-sm:hover {
+    background-color: rgb(74, 173, 157) !important;
+    border-color: rgb(74, 173, 157) !important;
+    border: 2px solid black;
+    color: white !important;
+}
 /* Tabela ações - estreita */
 .table .actions-btn {
     display: flex;

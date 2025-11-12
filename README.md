@@ -1,21 +1,20 @@
-
-<!-- <h4 align="center">
+<h4 align="center">
   <img src="static/img/logo.svg" alt="Rótus Logo" width="60" style="vertical-align: middle; margin-right: 10px;"/>
  <span style="font-size: 20px;">- 2025 | DSM</span>
 </h4>
 
-<p align="center"> -->
+<!-- <p align="center">
 <h1 align="center">🧠 Rótus — Dashboard Nutricional- 2025 | DSM</h1>
 <p align="center">
 
   ![]()
   
-</p>
+</p> -->
 
 <p align="center">
 Projeto avaliativo da disciplina Banco de dados não relacional, 3° semestre, do curso <a href="https://fatecararas.cps.sp.gov.br/tecnologia-em-desenvolvimento-de-softwares-multiplataforma/">DSM- Desenvolvimento de software multiplataforma.</a>
 
-# 📃 Sumário:
+## 📃 Sumário:
 
 <p align="center">
  <a href="#-status-do-projeto">Status</a> • 
@@ -41,8 +40,8 @@ A aplicação permite **CRUD completo** de receitas, cálculo de indicadores, e 
 
 ### 📊 Status do Projeto
 <!-- ![Status](https://img.shields.io/badge/status-em%20andamento-yellow)   -->
-<!-- <h3 align="center">✅ Concluído ✅</h3> -->
-<h3 align="center">🚧🚧 Em construção!  👷 🧱🚧</h3>
+<h3 align="center">✅ Concluído ✅</h3>
+<!-- <h3 align="center">🚧🚧 Em construção!  👷 🧱🚧</h3> -->
 
 ---
 ## Layout da página inicial
@@ -53,7 +52,7 @@ A aplicação permite **CRUD completo** de receitas, cálculo de indicadores, e 
 
 ## Layout do Dashboard
 
-![Dashboard Screenshot](/img/dash.JPG)
+![Dashboard Screenshot](/img/dash.PNG)
 
 ---
 

@@ -87,11 +87,9 @@ const api = {
         })[m]);
     }
 
-
-
-    // ==================== INGREDIENTES UI ====================
+    // ==================== INGREDIENTES UI/ Modal editar ====================
     function createIngredienteElement(ingrediente = null) {
-        const id = ingrediente && ingrediente._id ? ingrediente._id : `ing-${Date.now()}-${Math.floor(Math.random()*1000)}`;
+        const id = ingrediente && ingrediente._id ? ingrediente._id : `ing-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
         const wrapper = document.createElement('div');
         wrapper.className = 'ingrediente-item';
         wrapper.dataset.ingId = id;
@@ -100,22 +98,33 @@ const api = {
             <div class="row align-items-center">
                 <div class="col-12 col-md-5 mb-2">
                     <label class="form-label small">Alimento</label>
-                    <input type="text" class="form-control form-control-sm ing-nome" value="${ingrediente ? escapeHtml(ingrediente.nome) : ''}" required>
+                    <input type="text" 
+                        class="form-control form-control-sm ing-nome" 
+                        value="${ingrediente ? escapeHtml(ingrediente.alimento || ingrediente.nome || '') : ''}" 
+                        required>
                 </div>
                 <div class="col-4 col-md-2 mb-2">
                     <label class="form-label small">Peso bruto</label>
-                    <input type="number" step="0.01" class="form-control form-control-sm ing-peso-bruto" value="${ingrediente ? ingrediente.peso_bruto : ''}">
+                    <input type="number" step="0.01" 
+                        class="form-control form-control-sm ing-peso-bruto" 
+                        value="${ingrediente ? ingrediente.peso_bruto || '' : ''}">
                 </div>
                 <div class="col-4 col-md-2 mb-2">
                     <label class="form-label small">Peso líquido</label>
-                    <input type="number" step="0.01" class="form-control form-control-sm ing-peso-liq" value="${ingrediente ? ingrediente.peso_liquido : ''}">
+                    <input type="number" step="0.01" 
+                        class="form-control form-control-sm ing-peso-liq" 
+                        value="${ingrediente ? ingrediente.peso_liquido || '' : ''}">
                 </div>
                 <div class="col-4 col-md-2 mb-2">
                     <label class="form-label small">Peso processado</label>
-                    <input type="number" step="0.01" class="form-control form-control-sm ing-peso-proc" value="${ingrediente ? ingrediente.peso_processado : ''}">
+                    <input type="number" step="0.01" 
+                        class="form-control form-control-sm ing-peso-proc" 
+                        value="${ingrediente ? ingrediente.peso_processado || '' : ''}">
                 </div>
                 <div class="col-12 col-md-1 mb-2 text-end">
-                    <button type="button" class="btn btn-sm btn-danger btn-delete-ing"><i class="bi bi-trash"></i></button>
+                    <button type="button" class="btn btn-sm btn-danger btn-delete-ing">
+                        <i class="bi bi-trash"></i>
+                    </button>
                 </div>
             </div>
         `;
