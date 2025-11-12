@@ -52,7 +52,7 @@ A aplicação permite **CRUD completo** de receitas, cálculo de indicadores, e 
 
 ## Layout do Dashboard
 
-![Dashboard Screenshot](/img/dash.PNG)
+![Dashboard Screenshot](/img/dash.png)
 
 ---
 
